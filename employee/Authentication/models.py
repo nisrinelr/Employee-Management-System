@@ -8,7 +8,7 @@ class Employee(AbstractUser):
     email = models.EmailField(blank=True, null=True)
     first_name = models.CharField(blank=True, null=True, max_length=25)
     last_name =  models.CharField(blank=True, null=True, max_length=25)
-    phone_number = models.CharField(max_length=8,blank=True, null=True, validators=[RegexValidator(regex='^.{12}$', message='Length has to be 12')])
+    phone_number = models.CharField(max_length=12,blank=True, null=True, validators=[RegexValidator(regex='^.{12}$', message='Length has to be 12')])
     address = models.CharField(max_length=100)
     department = models.ForeignKey("Departement", on_delete=models.CASCADE, null=True)
     USERNAME_FIELD = "username"
@@ -20,3 +20,6 @@ class Departement(models.Model):
     name = models.CharField(max_length=100)
     employees = models.ManyToManyField(Employee)
     capacity = models.IntegerField()
+    
+    def __str__(self):
+        return self.name
