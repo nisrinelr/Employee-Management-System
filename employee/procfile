@@ -1,2 +1,3 @@
-   web: gunicorn employee.wsgi
-   worker: python employee.tasks
+web: gunicorn employee.wsgi
+web: python employee/manage.py migrate
+web: python employee/manage.py createsuperuser
