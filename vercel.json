@@ -1,0 +1,13 @@
+{
+    "builds": [{
+        "src":"employee_manager/wsgi.py",
+        "use":"employee_manager/python",
+        "config":{"maxLambdaSize":"15mb", "runtime":"python3.12"}
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "employee_manager/wsgi.py"
+        }
+    ]
+}
