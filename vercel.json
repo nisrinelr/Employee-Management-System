@@ -1,0 +1,13 @@
+{
+    "builds": [{
+        "src":"tailAdmin/wsgi.py",
+        "use":"tailAdmin/python",
+        "config":{"maxLambdaSize":"15mb", "runtime":"python3.12"}
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "tailAdmin/wsgi.py"
+        }
+    ]
+}
