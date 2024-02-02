@@ -6,6 +6,10 @@
     }],
     "routes": [
         {
+            "src": "/static/(.*)",
+            "dest": "employee_manager/static"
+        },
+        {
             "src": "/(.*)",
             "dest": "employee_manager/wsgi.py"
         }
