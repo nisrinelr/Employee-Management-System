@@ -25,6 +25,11 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'tailwind',
     'theme',
+    'authentication',
+    'assets',
+    'attendance',
+    'payroll',
+    'leave',
 ]
 
 # for tailwind css
@@ -70,11 +75,16 @@ WSGI_APPLICATION = 'tailAdmin.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'data_employees',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
+AUTH_USER_MODEL = 'authentication.Employee'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
