@@ -6,7 +6,7 @@ charset-normalizer==3.3.2
 cryptography==41.0.7
 defusedxml==0.7.1
 dj-database-url==2.1.0
-Django==5.0.1
+Django==4.2.9
 django-adminlte-3==0.1.6
 django-adminlte3==0.1.6
 django-bitfield==2.2.0
