@@ -30,7 +30,7 @@ djangorestframework-simplejwt==5.3.1
 gunicorn==21.2.0
 idna==3.6
 lxml==5.1.0
-numpy==1.26.3
+numpy==1.24.4
 oauthlib==3.2.2
 packaging==23.2
 pandas==2.2.0
