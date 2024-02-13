@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'payroll',
     'leave',
     'tasks',
+
 ]
 
 # for tailwind css
@@ -77,16 +78,13 @@ WSGI_APPLICATION = 'employee_manager.wsgi.application'
 
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'data_employees',
-            'USER': 'root',
-            'PASSWORD': '',
-            'HOST': 'localhost',
-            'PORT': '3306',
-            'OPTIONS': {
-                'charset': 'utf8mb4',
-            },
-        }
+            'ENGINE': 'django.db.backends.postgresql',  # Database engine
+            'NAME': 'railway',               # Database name
+            'USER': 'postgres',               # Database user
+            'PASSWORD': '*Eg*G15*ed1BFd6F*CcDG*BDe5A43DEF',       # Database password
+            'HOST': 'roundhouse.proxy.rlwy.net',                        # Database host
+            'PORT': '16402',
+            }
     }
 
 AUTH_USER_MODEL = 'authentication.Employee'
@@ -133,4 +131,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles_build' , 'static')
