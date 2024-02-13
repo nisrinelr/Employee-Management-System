@@ -45,6 +45,7 @@ six>=1.16.0
 South>=1.0.2
 sqlparse>=0.4.4
 typing_extensions>=4.9.0
+libpq-dev
 tzdata>=2023.4
 unicodecsv>=0.14.1
 urllib3>=2.1.0
