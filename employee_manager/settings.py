@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,7 +10,7 @@ SECRET_KEY = 'django-insecure-@2soi&jx2&z7s3@45uhkkz%ig9s3@-1+-^ky6%y@t-qf2&(7xb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app','now.sh' ,'127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'payroll',
     'leave',
     'tasks',
+    'payslip',
 ]
 
 # for tailwind css
@@ -42,6 +44,7 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -75,14 +78,17 @@ WSGI_APPLICATION = 'employee_manager.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': '3hH6e326b6cdfhb3EBG5aH43fgGae1Hb',
-        'HOST': 'roundhouse.proxy.rlwy.net',
-        'PORT': '3306',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'data_employees',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '3306',
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+            },
+        }
     }
-}
 
 AUTH_USER_MODEL = 'authentication.Employee'
 
@@ -128,4 +134,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

@@ -8,19 +8,59 @@ class SimpleAccountAdmin(admin.ModelAdmin):
 
 
 
-    list_display = ('username', 'email', 'phone_number',)
-    list_filter = ('employee_type', )
-    search_fields = ('username', 'email', 'first_name', 'last_name', 'phone_number',)
+    list_display = (
+    'emp_id',
+    'username',
+    'first_name',
+    'middle_name',
+    'last_name',
+    'parentage',
+    'contact_number',
+    'email',
+    'gender',
+    'address',
+    'department',
+    'employee_type',
+    'date_of_hiring',
+    'date_of_joining',
+    'nationality',
+    'passport_number',
+    'national_id_residence_permit',
+    'adhaar_number',
+    'date_of_birth',
+    'work_location',
+    'profile_picture',
+    'passport_front',
+    'passport_back', 
+    )
+    list_filter = ('employee_type',)
+    search_fields = ('username', 'email', 'first_name', 'last_name', 'emp_id',)
 
 
     fields = (
-        'email',
-        'username',
-        'first_name',
-        'last_name',
-        'phone_number',
-        'employee_type',
-    )
+    'username',
+    'first_name',
+    'middle_name',
+    'last_name',
+    'parentage',
+    'contact_number',
+    'email',
+    'gender',
+    'address',
+    'department',
+    'employee_type',
+    'date_of_hiring',
+    'date_of_joining',
+    'nationality',
+    'passport_number',
+    'national_id_residence_permit',
+    'adhaar_number',
+    'date_of_birth',
+    'work_location',
+    'profile_picture',
+    'passport_front',
+    'passport_back', 
+)
+
    
-#admin.site.register(Account)
 admin.site.register(Employee, SimpleAccountAdmin)

@@ -17,6 +17,9 @@
             {% else %}
               <th class="text-left" scope="row">{{ model.name }}</th>
             {% endif %}
+            <td>
+              <button onclick="generatePDF('{{ model.employee_id }}')" class="bg-blue-500 text-white font-heads font-semibold hover:bg-blue-600 text-sm py-1 px-3 rounded-lg">{% translate 'report' %}</button>
+            </td>
             <div>
               {% if model.add_url %}
                 <td class="text-right">
@@ -44,6 +47,12 @@
         {% endfor %}
       </table>
     </div>
+    <script>
+      function generatePDF(employee_id) {
+        const url = `authentication/generatePdf/${employee_id}`;
+        window.location.href = url;
+      }
+    </script>
   {% endfor %}
 {% else %}
   <p class="font-heads">{% translate 'You don’t have permission to view or edit anything.' %}</p>

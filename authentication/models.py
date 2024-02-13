@@ -1,20 +1,45 @@
+import random
+import string
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
-from authentication.choices import EMPLOYEE_TYPE
+from authentication.choices import EMPLOYEE_TYPE , GENDER_CHOICES
 # Create your models here.
 
 class Employee(AbstractUser):
-    username = models.CharField(max_length=50, unique=True)
-    email = models.EmailField(blank=True, null=True)
-    first_name = models.CharField(blank=True, null=True, max_length=25)
-    last_name =  models.CharField(blank=True, null=True, max_length=25)
-    phone_number = models.CharField(max_length=12,blank=True, null=True, validators=[RegexValidator(regex='^.{12}$', message='Length has to be 12')])
-    address = models.CharField(max_length=100)
-    department = models.ForeignKey("Departement", on_delete=models.CASCADE, null=True)
-    employee_type = models.CharField(choices = EMPLOYEE_TYPE, max_length = 20, default = 'full_time')
+    emp_id = models.CharField(max_length=10, unique=True, editable=False, null=True)
+    username = models.CharField(max_length=50, unique=True, null=True)
+    first_name = models.CharField(max_length=50, null=True)
+    middle_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, null=True)
+    parentage = models.CharField(max_length=100, null=True)
+    contact_number = models.CharField(max_length=12,blank=True, null=True, validators=[RegexValidator(regex='^.{12}$', message='Length has to be 12')])
+    email = models.EmailField(null=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True)
+    address = models.TextField(null=True)
+    department = models.ForeignKey('Departement', on_delete = models.CASCADE, null=True)
+    employee_type = models.CharField(max_length=20, choices=EMPLOYEE_TYPE, null=True)
+    date_of_hiring = models.DateField(null=True)
+    date_of_joining = models.DateField(null=True)
+    nationality = models.CharField(max_length=50, null=True)
+    passport_number = models.CharField(max_length=20, null=True)
+    national_id_residence_permit = models.CharField(max_length=20, null=True)
+    adhaar_number = models.CharField(max_length=12, blank=True, null=True)
+    date_of_birth = models.DateField(null=True)
+    work_location = models.CharField(max_length=100, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+    passport_front = models.FileField(upload_to='passport_scans_front/', blank=True, null=True)
+    passport_back = models.FileField(upload_to='passport_scans_back/', blank=True, null=True)
+    
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
+    
+    def save(self, *args, **kwargs):
+       emp_id_prefix = (self.username[:3]).lower()
+       emp_id_suffix = ''.join(random.choices(string.digits, k=3))
+       self.emp_id = f"{emp_id_prefix}-{emp_id_suffix}"
+       super().save(*args, **kwargs)
+       
     def __str__(self):
         return self.username
 

@@ -79,26 +79,27 @@
           {% endblock %}
           {% block pagination %}{% pagination cl %}{% endblock %}
           </form>
+        
+    
+  </div>
+</div>
+{% block filters %}
+      {% if cl.has_filters %}
+        <div id="changelist-filter" class="w-full md:w-1/4 mt-6 md:mt-0 bg-gray-900 py-2 px-3">
+          <h2 class="text-lime-400 font-heads font-semibold text-lg pb-2 mb-2 border-b-2 border-dashed border-gray-700">{% translate 'Filter' %}</h2>
+          {% if cl.has_active_filters %}<h3 id="changelist-filter-clear">
+            <a href="{{ cl.clear_all_filters_qs }}">&#10006; {% translate "Clear all filters" %}</a>
+          </h3>{% endif %}
+          {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
         </div>
-        {% block filters %}
-          {% if cl.has_filters %}
-            <div id="changelist-filter" class="w-full md:w-1/4 mt-6 md:mt-0 bg-gray-900 py-2 px-3">
-              <h2 class="text-lime-400 font-heads font-semibold text-lg pb-2 mb-2 border-b-2 border-dashed border-gray-700">{% translate 'Filter' %}</h2>
-              {% if cl.has_active_filters %}<h3 id="changelist-filter-clear">
-                <a href="{{ cl.clear_all_filters_qs }}">&#10006; {% translate "Clear all filters" %}</a>
-              </h3>{% endif %}
-              {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
-            </div>
-            {%else%}
-            <style>
-              .changeForm{
-                width: 100% !important;
-                justify-content: center !important;
-              }
-            </style>
-          {% endif %}
-        {% endblock %}
-      </div>
-    </div>
+        {%else%}
+        <style>
+          .changeForm{
+            width: 100% !important;
+            justify-content: center !important;
+          }
+        </style>
+      {% endif %}
+    {% endblock %}
   </div>
 {% endblock %}

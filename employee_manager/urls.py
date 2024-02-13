@@ -4,11 +4,11 @@ from django.conf import settings
 from django.views.static import serve
 from django.conf.urls.static import static
 
-
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('home.urls')),
+    path('', admin.site.urls),
+    path('authentication/', include('authentication.urls')),
+    path('generatePdf/', include('authentication.urls')),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
