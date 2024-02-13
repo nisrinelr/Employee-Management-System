@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'payroll',
     'leave',
     'tasks',
-    'payslip',
 ]
 
 # for tailwind css
