@@ -10,21 +10,21 @@ SECRET_KEY = 'django-insecure-@2soi&jx2&z7s3@45uhkkz%ig9s3@-1+-^ky6%y@t-qf2&(7xb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['employee-management-system-production-1e54.up.railway.app']
+ALLOWED_HOSTS = ['https://employee-management-system-production-b4f9.up.railway.app/']
 
 # Application definition
 INSTALLED_APPS = [
+    'adminlte3',
+    'adminlte3_theme',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home.apps.HomeConfig',
     # for tailwind css
     'widget_tweaks',
     'tailwind',
-    'theme',
     'authentication',
     'assets',
     'attendance',
@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'employee_manager.wsgi.application'
 
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.postgresql',  # Database engine
-            'NAME': 'railway',               # Database name
-            'USER': 'postgres',               # Database user
-            'PASSWORD': '*Eg*G15*ed1BFd6F*CcDG*BDe5A43DEF',       # Database password
-            'HOST': 'roundhouse.proxy.rlwy.net',                        # Database host
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'railway',
+            'USER': 'postgres',
+            'PASSWORD': '*Eg*G15*ed1BFd6F*CcDG*BDe5A43DEF',
+            'HOST': 'roundhouse.proxy.rlwy.net',
             'PORT': '16402',
             }
     }
