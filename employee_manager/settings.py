@@ -38,7 +38,6 @@ INSTALLED_APPS = [
 TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = [
     "127.0.0.1",
-    "3.94.97.250"
 ]
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
@@ -83,7 +82,7 @@ DATABASES = {
             'NAME': 'employee_mgmt_db',
             'USER': 'ubuntu',
             'PASSWORD': 'ubuntu_1q2w3e4r5t6y_2024',
-            'HOST': '3.94.97.250',
+            'HOST': '127.0.0.1',
             'PORT': '5432',
             }
     }
