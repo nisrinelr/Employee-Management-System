@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-@2soi&jx2&z7s3@45uhkkz%ig9s3@-1+-^ky6%y@t-qf2&(7xb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://employee-management-system-production-b4f9.up.railway.app/', '3.94.97.250']
+ALLOWED_HOSTS = ['https://employee-management-system-production-b4f9.up.railway.app/', '3.94.97.250', 'ec2-3-94-97-250.compute-1.amazonaws.com']
 
 # Application definition
 INSTALLED_APPS = [
