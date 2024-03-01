@@ -23,7 +23,18 @@ EMPLOYEE_TYPE = [
 ]
 
 GENDER_CHOICES = (
-        ('male', 'Male'),
-        ('female', 'Female'),
-        ('other', 'Other'),
+    ('male', 'Male'),
+    ('female', 'Female'),
+    ('other', 'Other'),
+    )
+USER_TYPE = (
+    ('0', 'SUPERADMIN'),
+    ('1', 'HRMANAGER'),
+    ('2', 'EMPLOYEE'),
+)
+LEAVE_TYPES = (
+    ('Sick Leave', 'Sick Leave'),
+    ('Vacation Leave', 'Vacation Leave'),
+    ('Maternity/Paternity Leave', 'Maternity/Paternity Leave'),
+    ('Unpaid Leave', 'Unpaid Leave'),
     )

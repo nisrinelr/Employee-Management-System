@@ -8,9 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-@2soi&jx2&z7s3@45uhkkz%ig9s3@-1+-^ky6%y@t-qf2&(7xb'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://employee-management-system-production-b4f9.up.railway.app/']
+ALLOWED_HOSTS = ['https://employee-management-system-production-b4f9.up.railway.app/', '3.94.97.250', 'ec2-3-94-97-250.compute-1.amazonaws.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'employee_manager.wsgi.application'
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'railway',
-            'USER': 'postgres',
-            'PASSWORD': '*Eg*G15*ed1BFd6F*CcDG*BDe5A43DEF',
-            'HOST': 'roundhouse.proxy.rlwy.net',
-            'PORT': '16402',
+            'NAME': 'employee_mgmt_db',
+            'USER': 'ubuntu',
+            'PASSWORD': 'ubuntu_1q2w3e4r5t6y_2024',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
             }
     }
 
@@ -132,3 +132,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles_build' , 'static')
+
+
+AUTHENTICATION_BACKENDS = [
+    'authentication.backends.EmployeeBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]

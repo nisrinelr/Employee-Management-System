@@ -1,15 +1,46 @@
 from django.db import models
 from authentication.models import Employee
-# Create your models here.
 
-class Salary(models.Model):
-    employee = models.OneToOneField(Employee, on_delete=models.CASCADE)
-    base_salary = models.DecimalField(max_digits=10, decimal_places=2)
-    tax_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.15)
-
-    def calculate_net_salary(self):
-        net_salary = self.base_salary - (self.base_salary * self.tax_rate)
-        return net_salary
+class Country(models.Model):
+    name = models.CharField(max_length=100)
+    tax_rate = models.FloatField()
 
     def __str__(self):
-        return f"{self.employee.first_name} {self.employee.last_name}'s Salary"
+        return self.name
+
+class Deduction(models.Model):
+    name = models.CharField(max_length=100)
+    amount = models.FloatField()
+
+    def __str__(self):
+        return f"{self.name}"
+
+class Allowences(models.Model):
+    name = models.CharField(max_length=100)
+    amount = models.FloatField()
+
+    def __str__(self):
+        return f"{self.name}"
+
+class PayrollReport(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    month = models.IntegerField(choices=[(i, i) for i in range(1, 13)])
+    year = models.IntegerField()
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    deductions = models.ManyToManyField(Deduction)
+    allowences = models.ManyToManyField(Allowences)
+    net_salary = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.calculate_net_salary()
+        
+    def calculate_net_salary(self):
+        total_allowances = sum(allowance.amount for allowance in self.allowances.all())
+        total_deductions = sum(deduction.amount for deduction in self.deductions.all())
+        self.net_salary = self.employee.salary + total_allowances - total_deductions
+        self.save()
+    
+    
+
+    
