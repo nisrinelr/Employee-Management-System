@@ -32,7 +32,7 @@ class Employee(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     passport_front = models.FileField(upload_to='passport_scans_front/', blank=True, null=True)
     passport_back = models.FileField(upload_to='passport_scans_back/', blank=True, null=True)
-    user_type = models.CharField(choices=USER_TYPE, default=0)
+    user_type = models.CharField(max_length=100, choices=USER_TYPE, default=0)
     
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
