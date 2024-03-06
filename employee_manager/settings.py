@@ -8,9 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-@2soi&jx2&z7s3@45uhkkz%ig9s3@-1+-^ky6%y@t-qf2&(7xb'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['https://employee-management-system-production-b4f9.up.railway.app/', '3.224.103.30', 'ec2-3-224-103-30.compute-1.amazonaws.com/']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
