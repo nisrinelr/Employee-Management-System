@@ -9,7 +9,7 @@ class LeaveAdmin(admin.ModelAdmin):
     fields = ('leave_type', 'start_date', 'end_date', 'reason')
     
     def approve_leave_request(self, request, queryset):
-        if not request.user.is_authenticated or request.user.user_type not in ['HRMANAGER', 'SUPERUSER']:
+        if not request.user.is_authenticated or not (request.user.is_superuser or request.user.user_type in ['0', '1', 'HRMANAGER', 'SUPERUSER']):
             self.message_user(request, "You don't have permission to approve leave requests.", level='ERROR')
             return
         for leave_request in queryset:

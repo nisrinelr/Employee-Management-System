@@ -78,7 +78,7 @@ class SimpleAccountAdmin(admin.ModelAdmin):
         
     
     def generate_pdf_user_info(modeladmin, request, queryset):
-        if not request.user.is_authenticated or not request.user.user_type in [SUPERADMIN, HRMANAGER]:
+        if not request.user.is_authenticated or not (request.user.is_superuser or request.user.user_type in ['0', '1', SUPERADMIN, HRMANAGER]):
             return HttpResponse("You don't have the permission to access this page.", status=403)
 
         response = HttpResponse(content_type='application/pdf')
@@ -171,7 +171,7 @@ class SimpleAccountAdmin(admin.ModelAdmin):
 
         
     def generate_offer_letter(modeladmin, request, queryset):
-        if not request.user.is_authenticated or not request.user.user_type in ['SUPERUSER', 'HRMANAGER']:
+        if not request.user.is_authenticated or not (request.user.is_superuser or request.user.user_type in ['0', '1', 'SUPERUSER', 'HRMANAGER']):
             return HttpResponse("You don't have the permission to access this page.", status=403)
 
         response = HttpResponse(content_type='application/pdf')
