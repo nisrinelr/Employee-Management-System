@@ -42,6 +42,10 @@ INTERNAL_IPS = [
 ]
 NPM_BIN_PATH = os.environ.get('NPM_BIN_PATH', 'npm')
 
+# Tells django-tailwind to download the standalone CLI automatically
+# This is crucial for Vercel where NPM isn't available in the Python build step
+import os
+TAILWIND_CLI_PATH = os.path.join(BASE_DIR, 'theme', 'static', 'tailwind', 'tailwind-cli')
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
