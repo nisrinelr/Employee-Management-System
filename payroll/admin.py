@@ -38,6 +38,10 @@ class PayrollReportAdmin(admin.ModelAdmin):
             obj.employee = request.user
         obj.save()
 
+    def save_related(self, request, form, formsets, change):
+        super().save_related(request, form, formsets, change)
+        form.instance.calculate_net_salary()
+
 
     def get_deductions(self, obj):
         return ", ".join([deduction.name for deduction in obj.deductions.all()])

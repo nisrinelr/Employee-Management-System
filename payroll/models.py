@@ -32,15 +32,18 @@ class PayrollReport(models.Model):
     net_salary = models.DecimalField(max_digits=10, decimal_places=2)
     
     def save(self, *args, **kwargs):
+        if self.net_salary is None:
+            self.net_salary = getattr(self.employee, 'salary', 0) if self.employee_id else 0
         super().save(*args, **kwargs)
-        self.calculate_net_salary()
         
     def calculate_net_salary(self):
-        total_allowances = sum(allowance.amount for allowance in self.allowances.all())
+        if not self.pk:
+            return
+        total_allowances = sum(allowance.amount for allowance in self.allowences.all())
         total_deductions = sum(deduction.amount for deduction in self.deductions.all())
-        self.net_salary = self.employee.salary + total_allowances - total_deductions
-        self.save()
-    
-    
+        employee_salary = getattr(self.employee, 'salary', 0) if self.employee_id else 0
+        self.net_salary = employee_salary + total_allowances - total_deductions
+        PayrollReport.objects.filter(pk=self.pk).update(net_salary=self.net_salary)
+
 
     
