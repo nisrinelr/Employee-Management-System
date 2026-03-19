@@ -1,5 +1,4 @@
 __pycache__/
-migrations/
 *pyc
 db.sqlite3
 media/
@@ -8,3 +7,4 @@ media/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 .venv
+.env
