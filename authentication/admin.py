@@ -44,6 +44,7 @@ class SimpleAccountAdmin(admin.ModelAdmin):
     )
     list_filter = ('employee_type',)
     search_fields = ('username', 'email', 'first_name', 'last_name', 'emp_id',)
+    actions = ['generate_pdf_user_info', 'generate_offer_letter']
 
 
     fields = (
@@ -152,7 +153,6 @@ class SimpleAccountAdmin(admin.ModelAdmin):
         return response
 
     generate_pdf_user_info.short_description = "Generate PDF of selected users' info"
-    admin.site.add_action(generate_pdf_user_info)
 
 
 
@@ -192,7 +192,6 @@ class SimpleAccountAdmin(admin.ModelAdmin):
         return response
 
     generate_offer_letter.short_description = "generate ofer letter"
-    admin.site.add_action(generate_offer_letter)
     
 class NotificationAdmin(admin.ModelAdmin):
 
