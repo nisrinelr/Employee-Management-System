@@ -104,69 +104,49 @@ class SimpleAccountAdmin(admin.ModelAdmin):
         
         for user in queryset:
             elements.append(Paragraph("Employee Report for {}".format(user.username), style_heading))
-            if user.profile_picture:
-                try:
-                    profile_picture_path = user.profile_picture.path
-                    profile_picture = Image(profile_picture_path, width=100, height=100)
-                    elements.append(profile_picture)
-                except Exception:
-                    elements.append(Paragraph("<i>(Profile Picture not found on server)</i>", style_normal))
-
             elements.append(Spacer(1, 20))
+            
+            # Basic Info
             for field in list_display_fields:
                 if hasattr(user, field):
                     field_name = field.replace('_', ' ').capitalize()
                     value = getattr(user, field)
-                    basic_info_table_data = [[field_name, value]]
+                    safe_value = str(value) if value is not None else "N/A"
+                    basic_info_table_data = [[field_name, safe_value]]
                     basic_info_table = Table(basic_info_table_data, style=[('ALIGN', (0, 0), (-1, -1), 'LEFT')])
                     elements.append(basic_info_table)
-                    elements.append(Spacer(1, 20))
+                    elements.append(Spacer(1, 10))
 
-            if user.passport_front and user.passport_back:
-                try:
-                    passport_front = Image(user.passport_front.path, width=100, height=100)
-                    elements.append(passport_front)
-                except Exception:
-                    elements.append(Paragraph("<i>(Passport Front not found on server)</i>", style_normal))
-
-                try:
-                    passport_back = Image(user.passport_back.path, width=100, height=100)
-                    elements.append(passport_back)
-                except Exception:
-                    elements.append(Paragraph("<i>(Passport Back not found on server)</i>", style_normal))
-
-                elements.append(Spacer(1, 20))
-                
+            # Tasks
             tasks_assigned = Task.objects.filter(assigned_to=user)
             if tasks_assigned.exists():
                 tasks_data = [['Task', 'Status']]
                 for task in tasks_assigned:
-                    tasks_data.append([task.title, task.status])
+                    tasks_data.append([str(task.title), str(task.status)])
                 tasks_table = Table(tasks_data, style=[('GRID', (0, 0), (-1, -1), 1, colors.black)])
                 elements.append(Paragraph("<b>Tasks Assigned:</b>", style_heading))
                 elements.append(tasks_table)
+                elements.append(Spacer(1, 15))
 
-            elements.append(Spacer(1, 20))
+            # Assets
             assigned_assets = Asset.objects.filter(assigned_to=user)
             if assigned_assets.exists():
-                elements.append(Paragraph("<br/>Assigned Assets:", style_heading))
+                elements.append(Paragraph("<b>Assigned Assets:</b>", style_heading))
                 for asset in assigned_assets:
                     elements.append(Paragraph("- {}".format(asset.name), style_normal))
+                elements.append(Spacer(1, 15))
 
+            # Attendance
             attendance_records = Attendance.objects.filter(employee=user)
             if attendance_records.exists():
                 attendance_data = [['Date', 'Status']]
                 for attendance in attendance_records:
-                    attendance_data.append([str(attendance.date), attendance.status])
+                    attendance_data.append([str(attendance.date), str(attendance.status)])
                 attendance_table = Table(attendance_data, style=[('GRID', (0, 0), (-1, -1), 1, colors.black)])
                 elements.append(Paragraph("<b>Attendance:</b>", style_heading))
                 elements.append(attendance_table)
 
-            elements.append(Spacer(1, 20))  
-
-
-            
-            elements.append(Paragraph("<br/><br/><br/><br/>", style_normal))
+            elements.append(Spacer(1, 30))
 
         doc.build(elements)
         return response
