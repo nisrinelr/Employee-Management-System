@@ -2,7 +2,7 @@
 set -e
 
 echo "Installing dependencies..."
-pip3 install -r requirements.txt
+pip3 install --break-system-packages -r requirements.txt
 
 echo "Creating static directories..."
 mkdir -p staticfiles_build/static
