@@ -1,5 +1,4 @@
 {
-  "nodejs": "22.x",
   "builds": [
     {
       "src": "employee_manager/wsgi.py",
