@@ -105,9 +105,12 @@ class SimpleAccountAdmin(admin.ModelAdmin):
         for user in queryset:
             elements.append(Paragraph("Employee Report for {}".format(user.username), style_heading))
             if user.profile_picture:
-                profile_picture_path = f"profile_pictures/test.png"  # Replace with the actual path to profile pictures
-                profile_picture = Image(profile_picture_path, width=100, height=100)
-                elements.append(profile_picture)
+                try:
+                    profile_picture_path = user.profile_picture.path
+                    profile_picture = Image(profile_picture_path, width=100, height=100)
+                    elements.append(profile_picture)
+                except Exception:
+                    elements.append(Paragraph("<i>(Profile Picture not found on server)</i>", style_normal))
 
             elements.append(Spacer(1, 20))
             for field in list_display_fields:
@@ -120,12 +123,17 @@ class SimpleAccountAdmin(admin.ModelAdmin):
                     elements.append(Spacer(1, 20))
 
             if user.passport_front and user.passport_back:
-                passport_front_path = f"{user.passport_front}"
-                passport_back_path = f"{user.passport_back}"
-                passport_front = Image(passport_front_path, width=100, height=100)
-                passport_back = Image(passport_back_path, width=100, height=100)
-                elements.append(passport_front)
-                elements.append(passport_back)
+                try:
+                    passport_front = Image(user.passport_front.path, width=100, height=100)
+                    elements.append(passport_front)
+                except Exception:
+                    elements.append(Paragraph("<i>(Passport Front not found on server)</i>", style_normal))
+
+                try:
+                    passport_back = Image(user.passport_back.path, width=100, height=100)
+                    elements.append(passport_back)
+                except Exception:
+                    elements.append(Paragraph("<i>(Passport Back not found on server)</i>", style_normal))
 
                 elements.append(Spacer(1, 20))
                 
